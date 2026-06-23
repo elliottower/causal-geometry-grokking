@@ -16,6 +16,10 @@ build/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.nav
+*.snm
+*.toc
+.tmp_claude/
 cache/
 *.pt
 *.safetensors
