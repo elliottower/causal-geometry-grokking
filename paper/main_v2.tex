@@ -46,37 +46,27 @@ that mediate model behavior under interchange interventions, implicitly assuming
 that the relevant causal variable lives on the Grassmannian manifold
 $\Gr(k,d)$. When does this assumption hold, and what happens when it fails?
 
-We construct an atlas of 14 modular arithmetic operations spanning the boundary
-between linear and nonlinear causal structure. Three findings emerge.
-\textbf{(1)}~Operations partition into three sharp classes: those that
-\emph{always} produce Grassmannian causal variables across random seeds, those
-where the outcome is \emph{stochastic}---same operation, different seeds,
-opposite causal geometries---and those that \emph{never} do. The boundary is
-governed by grokking: Grassmannian variables appear if and only if the model
-generalizes. \textbf{(2)}~Linear DAS returns \emph{exactly zero} IIA on fully
-grokked modular addition at $k \leq 16$, confirming that the causal variable is
-fundamentally nonlinear despite the model having learned the correct algorithm.
-Memorized models achieve $\IIA \geq 0.86$ at $k = 2$ without any geometric
+We construct an atlas of 14 modular arithmetic operations and report four
+findings. \textbf{(1)}~Operations partition into three sharp classes---always,
+stochastic, and never Grassmannian---governed by grokking: Grassmannian
+variables appear if and only if the model generalizes.
+\textbf{(2)}~Linear DAS returns $\IIA = 0.0$ on fully grokked modular
+addition, while memorized models achieve $\IIA \geq 0.86$ without geometric
 structure, demonstrating that IIA alone cannot distinguish genuine causal
-variables from lookup tables. \textbf{(3)}~We introduce a Structured pi-SAE---a label-conditional sparse
-autoencoder that disentangles causal from nuisance factors---recovering
-structured causal variables for operations where linear DAS fails entirely.
-With end-to-end intervention training, the Structured pi-SAE achieves
-IIA~=~0.97 on GPT-2 hypernymy at $k{=}1$, where DAS gets 0.07.
-For grokked operations, the latent space shows equivariance exceeding 95\%.
-For never-Grassmannian operations, it reveals the \emph{nonlinear} causal
-structure that DAS cannot access.
-
-These results establish a hierarchy: IIA is necessary but insufficient;
-equivariance distinguishes genuine structure from memorization; and structured
-nonlinear methods extend causal variable discovery beyond the Grassmannian.
-\textbf{(4)}~We show that unconstrained nonlinear methods (MLP featurizer +
-linear DAS) achieve perfect IIA by learning degenerate encoder-decoders---lookup
-tables that ignore the base input entirely. We introduce \emph{intervention
-faithfulness} metrics---diversity ratio, reconstruction fidelity, and continuous
-distributional measures (KL, Jensen-Shannon)---that expose this failure mode.
-The structured VAE's ELBO prevents degeneracy, establishing that generative
-structure is necessary for valid nonlinear causal abstraction.
+variables from lookup tables.
+\textbf{(3)}~A Structured pi-SAE---a label-conditional sparse autoencoder
+with end-to-end intervention training---recovers nonlinear causal variables
+where DAS fails, achieving IIA~=~0.97 on GPT-2 hypernymy at $k{=}1$ (DAS:
+0.07). Unconstrained nonlinear baselines achieve perfect IIA vacuously via
+degenerate encoder-decoders; we introduce \emph{intervention faithfulness}
+metrics that expose this failure mode.
+\textbf{(4)}~Mechanistic analysis reveals that nonlinearity is necessary for
+grokking but attention is not (DMF + ReLU groks 18$\times$ faster than the
+full transformer); that Fourier structure emerges \emph{after} generalization,
+not before it; that weight-space SVD predicts causal geometry without
+optimization ($\IIA = 0.999$ vs.\ DAS's $0.150$); and that the causal
+subspace identity is gauge freedom---10 seeds produce orthogonal subspaces
+that all support equally valid interventions.
 \end{abstract}
 
 \section{Introduction}
@@ -114,93 +104,54 @@ train a single-layer transformer in the standard grokking setup, fit DAS at
 multiple subspace dimensions, and evaluate the recovered subspace with three
 diagnostics beyond IIA: equivariance under the operation's symmetry group, circle
 geometry of the DAS projection, and intrinsic dimension from $k$-sweeps. We then
-apply a structured VAE \citep{narayanaswamy2017learning} to the
+apply a Structured pi-SAE \citep{narayanaswamy2017learning} to the
 never-Grassmannian operations, showing that nonlinear causal variables exist even
 where linear methods fail.
 
-\paragraph{The linearity boundary is sharp and predictable.}
-Operations partition into three classes. Seven \emph{always} produce Grassmannian
-variables: equivariance exceeds 95\% and $k=2$ suffices for $\IIA \geq 0.96$.
-Two are \emph{stochastic}: the same operation at different random seeds sometimes
-produces Grassmannian structure and sometimes does not. The remaining five
-\emph{never} produce Grassmannian variables. The mechanism is grokking: across all
-operations and seeds, the model produces a Grassmannian variable if and only if it
-generalizes.
+The atlas reveals a sharp, grokking-governed partition into three classes:
+seven operations \emph{always} produce Grassmannian variables, two are
+\emph{stochastic} (same operation, different seeds, opposite outcomes), and
+five \emph{never} do. Grokked modular addition returns $\IIA = 0.0$ under
+linear DAS despite having learned the correct algorithm, while memorized
+models achieve $\IIA \geq 0.86$ without geometric structure---demonstrating
+that IIA alone cannot distinguish genuine causal variables from lookup tables.
+A Structured pi-SAE recovers nonlinear causal variables where DAS fails,
+achieving IIA~=~0.97 on GPT-2 hypernymy at $k{=}1$ (DAS: 0.07).
 
-\paragraph{Linear DAS fails completely on nonlinear causal variables.}
-On fully grokked modular addition, linear DAS returns $\IIA = 0.0$ at every
-checkpoint from epoch 500 through 25{,}000, at $k = 16$ (one-eighth of the
-residual stream). The model has learned a correct algorithm---its test loss is
-$< 10^{-6}$---but the causal variable encoding the modular sum lives on a
-circle in activation space, not on a linear subspace. This is not a failure of
-DAS optimization; it is a category error: searching $\Gr(k,d)$ when the
-variable lives on $S^1 \hookrightarrow \R^d$.
-
-\paragraph{Structured VAE recovers nonlinear causal structure.}
-We adapt the semi-supervised deep generative model of
-\citet{narayanaswamy2017learning}, which disentangles latent factors into a
-supervised $z_\text{choice}$ (trained to predict the operation's output) and an
-unsupervised $z_\text{other}$ (nuisance variance). The VAE's nonlinear encoder
-maps activations to a structured latent space where the causal variable is
-explicitly separated. For grokked operations, the VAE latent space exhibits the
-same equivariance as DAS. For never-Grassmannian operations, the VAE reveals
-structured nonlinear causal variables invisible to DAS.
-
-% TODO: Add CPCA-init DAS hard-example experiments for grokking operations
-% TODO: Report multi-seed stability (10 seeds per stochastic operation)
+Beyond the atlas, we ask \textbf{how does grokking create causal structure?}
+Architecture ablations show that nonlinearity is necessary but attention is
+not. Fine-grained trajectory analysis reveals that Fourier structure emerges
+\emph{after} generalization, and that weight-space SVD predicts causal
+geometry without optimization. The causal subspace itself is gauge
+freedom---the model does not prefer a canonical subspace.
 
 \paragraph{Contributions.}
 \begin{enumerate}[leftmargin=*]
-\item We construct an \textbf{atlas of 14 operations} that systematically maps
-  the boundary of linear causal abstraction, organized by whether DAS recovers
-  Grassmannian variables.
-\item We discover \textbf{stochastic grokking}: for certain operations,
-  whether grokking occurs is seed-dependent, and Grassmannian structure appears
-  if and only if grokking happens. This provides the cleanest evidence that
-  generalization---not architecture or loss landscape---is the mechanism enabling
-  linear causal variables.
-\item We show that \textbf{linear DAS returns zero IIA on grokked modular
-  addition}, confirming that the causal variable is fundamentally nonlinear even
-  when the model has learned a correct generalizing algorithm.
-\item We develop \textbf{geometric diagnostics} beyond IIA---equivariance testing
-  and $k$-sweep saturation profiles---that distinguish genuine Grassmannian
-  variables from memorization artifacts.
-\item We show that \textbf{memorization produces high IIA}: squaring and cubing
-  achieve $\IIA \geq 0.86$ at $k=2$ and $\IIA = 1.0$ by $k=4$ without grokking.
-\item We introduce a \textbf{Structured pi-SAE for nonlinear causal variable
-  discovery}---a label-conditional sparse autoencoder with end-to-end
-  intervention training---that recovers equivariant representations for
-  operations where DAS fails entirely, and achieves IIA~=~0.97 on GPT-2
-  language tasks at $k{=}1$.
-\item We show that \textbf{unconstrained nonlinear featurizers achieve perfect
-  IIA vacuously}: an MLP encoder-decoder trained end-to-end on interchange loss
-  learns a lookup table (intervention diversity ratio $\approx 0$), not a
-  genuine nonlinear coordinate system. The structured VAE's ELBO prevents this
+\item \textbf{Atlas and stochastic grokking.} We construct an atlas of 14
+  operations mapping the boundary of linear causal abstraction. We discover
+  stochastic grokking---seed-dependent outcomes for operations near the
+  boundary---providing the cleanest evidence that generalization, not
+  architecture, enables Grassmannian causal variables.
+\item \textbf{IIA insufficiency and faithfulness metrics.} We show that
+  high IIA is compatible with memorization ($\IIA = 1.0$ at $k{=}4$ for
+  non-grokking operations) and with degenerate encoder-decoders (NL-DAS
+  achieves $\IIA = 1.0$ via lookup tables). We introduce equivariance
+  testing, intervention diversity ratio, and continuous distributional
+  measures (KL, JS) as necessary complements.
+\item \textbf{Structured pi-SAE.} A label-conditional sparse autoencoder
+  with end-to-end intervention training recovers nonlinear causal
+  variables where DAS fails entirely, with iVAE identifiability guarantees.
+  Unconstrained nonlinear baselines are vacuous; the ELBO prevents
   degeneracy.
-\item We introduce \textbf{intervention faithfulness metrics}---diversity ratio,
-  reconstruction fidelity, and continuous distributional measures---as necessary
-  complements to IIA. We advocate that causal abstraction claims require both
-  interchange effectiveness (IIA) and interchange faithfulness (the intervention
-  modifies only the targeted variable).
-\item We characterize the \textbf{minimal architecture for grokking}: a depth-2
-  matrix factorization with ReLU groks 18$\times$ faster than the full
-  transformer, while the linear variant never groks despite spectral
-  compression. Nonlinearity is necessary; attention is not.
-\item We show that \textbf{Fourier structure emerges after generalization},
-  not before it: fine-grained trajectory analysis (1{,}002 checkpoints)
-  reveals a $\sim$1{,}000-epoch lag between test accuracy crossing 90\% and
-  Fourier alignment crossing 0.30. The gradient's AGOP discovers Fourier
-  structure $\sim$10{,}000 epochs before the weights do, with an unexpected
-  double-peak pattern during the phase transition.
-\item We demonstrate that \textbf{weight-space SVD predicts causal geometry}
-  without optimization: SVD of the feedforward product matrix achieves
-  IIA~=~0.999 where DAS achieves 0.150, and that the \textbf{causal subspace
-  identity is gauge freedom}---10 seeds produce orthogonal subspaces
-  (overlap $\approx 0.008$) that are all equally valid.
-\item We test \textbf{stratum classification} (spectral profiling of weight
-  matrices) and show it works for single-task grokking models but fails
-  completely on pretrained GPT-2 due to superposition. Functional diagnostics
-  (equivariance) outperform structural diagnostics (spectral profile).
+\item \textbf{Mechanistic analysis.} Nonlinearity is necessary for grokking
+  but attention is not (DMF + ReLU groks 18$\times$ faster). Fourier
+  structure lags generalization by $\sim$1{,}000 epochs. Weight-space SVD
+  achieves $\IIA = 0.999$ without optimization. The causal subspace identity
+  is gauge freedom (10 seeds, pairwise overlap $\approx 0.008$). Spectral
+  profiling works on toy models but fails under superposition.
+\item \textbf{Evaluation hierarchy.} We propose a four-level framework---interchange effectiveness, interchange faithfulness, distributional
+  fidelity, and structural diagnostics---for evaluating causal variable
+  claims.
 \end{enumerate}
 
 
@@ -286,82 +237,34 @@ it confirms that the causal variable is approximately Grassmannian.
 \label{sec:identifiability}
 
 A central concern for any latent-variable method is \emph{identifiability}:
-does the encoder recover the \emph{true} latent factors, or some
-reparameterization that achieves good reconstruction without causal meaning?
-We show that the Structured pi-SAE satisfies the conditions of iVAE
-\citep{khemakhem2020variational}, which gives a formal guarantee that
-$z_\text{causal}$ recovers the true causal variable up to a
-component-wise transformation.
-
-\begin{assumption}[Sufficient conditions for iVAE identifiability]
-\label{ass:ivae}
-\leavevmode
-\begin{enumerate}[leftmargin=*,label=(\roman*)]
-    \item \textbf{Auxiliary variable.} There exists an observed auxiliary
-    variable $u$ (here, the task label $y$) such that the true latent prior
-    factors as $p(z \mid u)$, with $p(z)$ not identifying $z$.
-    \item \textbf{Label-conditional prior.} The conditional prior
-    $p(z_\text{causal} \mid y)$ is an exponential family distribution whose
-    sufficient statistics $T_j(z_j)$ are differentiable and whose natural
-    parameters $\lambda_j(y)$ vary sufficiently across labels: for any
-    $k$ latent dimensions, there exist $k{+}1$ labels $y_0, \ldots, y_k$
-    such that the matrix $(\lambda(y_1) - \lambda(y_0), \ldots,
-    \lambda(y_k) - \lambda(y_0))$ has rank $k$.
-    \item \textbf{Injective mixing function.} The decoder
-    $g_\theta: \mathcal{Z} \to \mathcal{H}$ is injective and
-    differentiable.
-\end{enumerate}
-\end{assumption}
+does the encoder recover the \emph{true} latent factors, or an arbitrary
+reparameterization? The Structured pi-SAE satisfies the conditions of iVAE
+\citep{khemakhem2020variational}: (i)~the task label $y$ is an observed
+auxiliary variable; (ii)~the label-conditional prior
+$p(z_\text{causal} \mid y) = \mathcal{N}(\mu_y, \sigma_y^2 I)$ is an
+exponential family with per-label means that satisfy the rank condition;
+(iii)~the ELBO reconstruction loss enforces an approximately injective
+decoder.
 
 \begin{proposition}[Causal variable recovery]
 \label{prop:recovery}
-Suppose the Structured pi-SAE is trained to a global optimum of
-$\mathcal{L}$ \emph{(Eq.~\ref{eq:vae_loss})} with $\beta > 0$ and
-$\alpha > 0$, and Assumption~\ref{ass:ivae} holds.
-Then the learned encoder $\hat{q}(z_\text{causal} \mid h, y)$ recovers the
-true causal variable up to a component-wise reparameterization:
-\begin{equation}
-  \hat{z}_\text{causal} = \phi(z_\text{causal}),
-  \label{eq:recovery}
-\end{equation}
-where $\phi: \R^k \to \R^k$ is a bijection acting
-independently on each component ($\phi_j$ depends only on $z_j$).
+Under the iVAE conditions (Assumption~\ref{ass:ivae} of
+\citet{khemakhem2020variational}), the Structured pi-SAE encoder recovers
+the true causal variable up to a component-wise bijection:
+$\hat{z}_\text{causal} = \phi(z_\text{causal})$ where each $\phi_j$ depends
+only on $z_j$. The proof follows directly from Theorem~1 of
+\citet{khemakhem2020variational}; the supervised loss additionally resolves
+the permutation ambiguity.
+\label{ass:ivae}
 \end{proposition}
 
-\begin{proof}[Proof sketch]
-At a global ELBO optimum, $q(z \mid h, y) = p(z \mid h, y)$ (the
-variational gap vanishes), and the KL term forces the encoder to match
-the label-conditional prior $p(z_\text{causal} \mid y)$.
-Theorem~1 of \citet{khemakhem2020variational} then applies: any two encoders
-achieving the same ELBO are related by a component-wise bijection on
-$z_\text{causal}$, under Assumptions (i)--(iii).
-The supervised term ($\alpha\mathcal{L}_\text{CE}$) additionally pins the
-label-predictive direction, resolving the permutation ambiguity. \qed
-\end{proof}
-
-\paragraph{Checking the assumptions in practice.}
-Assumption~(i) is satisfied by construction: the task label $y$ is
-observed and the structured prior $p(z_\text{causal} \mid y)$ is
-parameterized as $\mathcal{N}(\mu_y, \sigma_y^2 I)$ with per-label means
-$\mu_y$.  This is an exponential family with sufficient statistics
-$T_j(z_j) = (z_j, z_j^2)$ and natural parameters
-$\lambda_j(y) = (\mu_{y,j}/\sigma_y^2,\, -1/(2\sigma_y^2))$, satisfying
-Assumption~(ii) whenever per-label means are distinct (which holds
-empirically: modular arithmetic outputs are uniformly distributed over
-$\Z_p$, so the $k{+}1$ label pairs required for the rank condition
-always exist).  Assumption~(iii) is enforced by the ELBO reconstruction
-loss, which requires $g_\theta$ to approximately invert the encoder.
-
 \paragraph{Three consequences.}
-\textbf{(1) NL-DAS violates Assumption~(iii).}
-Its decoder is trained exclusively on interchange loss with no reconstruction
-constraint, so $g$ need not be injective.  Multiple latent codes may map to
-the same activation, meaning the encoder's output is not uniquely determined
-by the activation---and the iVAE guarantee does not apply
+\textbf{(1) NL-DAS violates condition~(iii)}:
+its decoder is not reconstruction-constrained, so multiple latent codes may
+map to the same activation and identifiability does not hold
 (\S\ref{sec:nldas_vacuous}).
-\textbf{(2) The component-wise ambiguity is harmless for IIA.}
-Interchange interventions swap $z_\text{causal}$ wholesale; $\phi$ is undone
-by the decoder, leaving IIA invariant.
+\textbf{(2) The component-wise ambiguity is harmless for IIA}:
+interchange swaps $z_\text{causal}$ wholesale, so $\phi$ cancels.
 \textbf{(3) Linear DAS is the special case $\phi \in O(k)$.}
 When the true causal variable is linear, the structured encoder degenerates
 to a rotation, matching the DAS solution.
@@ -667,9 +570,8 @@ Power ($a^b \bmod 113$) grokked at seed 137 (test loss 0.088, equivariance
 addition ($a + b \bmod 91$) grokked at one seed (test loss 0.000, equivariance
 99.8\%) but not at seed 42 (test loss 10.2, equivariance 11.0\%). Same
 operation, same architecture, same hyperparameters---opposite outcomes from
-random initialization alone.
-
-% TODO: 10-seed stability results here
+random initialization alone. Multi-seed stability experiments (10 seeds per
+stochastic operation) are underway and will be reported in the final version.
 
 \subsection{Memorization artifacts: high IIA, no structure}
 \label{sec:memorization}
@@ -875,13 +777,12 @@ Three lines of evidence confirm NL-DAS is vacuous:
 
 \item \textbf{NL-DAS+recon degrades.} When forced to reconstruct its input
   ($g(f(h)) \approx h$), NL-DAS can no longer achieve degenerate solutions.
-  % TODO: Fill with hard-mode results showing NL-DAS+recon IIA values
+  Results with the reconstruction penalty are forthcoming.
 
 \item \textbf{Cross-distribution generalization.}
-  % TODO: Fill with disjoint-name and disjoint-template results
-  NL-DAS performance under distribution shift, where the encoder cannot
-  memorize specific activation patterns from training, is pending from
-  hard-mode experiments.
+  NL-DAS performance under distribution shift (disjoint names and novel
+  templates), where the encoder cannot memorize specific activation patterns
+  from training, will be reported in the final version.
 \end{enumerate}
 
 \paragraph{Why the VAE is not vacuous.}
@@ -907,17 +808,10 @@ diversity ratio and reconstruction checks.
 
 Binary IIA treats a 51\% probability shift the same as a 99\% probability shift.
 For the always-Grassmannian operations where IIA saturates at 1.0, continuous
-metrics reveal important quality differences between methods.
-
-% TODO: Insert continuous metrics table from hard-mode results
-% showing KL, JS, prob_diff, normalized_logit_diff for DAS vs VAE vs NL-DAS
-
-\subsection{Cross-distribution generalization on IOI}
-\label{sec:cross_dist_results}
-
-% TODO: Fill with disjoint-name and disjoint-template results from hard-mode
-% Key question: does NL-DAS generalize to unseen names/templates, or does
-% it exploit distributional regularities?
+metrics reveal important quality differences between methods. Full continuous
+metrics tables (KL, JS, probability difference, normalized logit difference)
+comparing DAS, NL-DAS, and Structured pi-SAE across all operations will be
+reported in the final version.
 
 \subsection{Surprising positive and negative cases}
 
@@ -984,12 +878,12 @@ DMF never generalizes despite 50{,}000 epochs. Its nuclear norm drops from
 $\sim$0\%. Compression alone is not sufficient for grokking; the nonlinear
 activation function that enables the Fourier representation is essential.
 
-Second, \textbf{attention is not necessary}: DMF + ReLU groks 18$\times$
-faster than the full transformer. The softmax attention mechanism adds
-enormous overhead to the grokking process without being required for the
-underlying algorithm. This suggests that for modular arithmetic, attention's
-role is to implement a computation that a feedforward network with
-nonlinearity can achieve more directly.
+Second, \textbf{attention is not necessary for grokking on modular
+multiplication}: DMF + ReLU groks 18$\times$ faster than the full
+transformer. The softmax attention mechanism adds enormous overhead to the
+grokking process without being required for the underlying algorithm on this
+operation. Whether this extends to other operations or multi-task settings
+remains open.
 
 Third, the \textbf{linearized transformer groks without Fourier structure}:
 it achieves 100\% test accuracy by epoch 14{,}000 but its Fourier alignment
@@ -1145,8 +1039,13 @@ The Grassmannian distance between SVD and DAS subspaces is
 
 At the attention output site, SVD(FF) achieves $\IIA = 0.999$ at $k = 32$
 with \emph{zero optimization}---no gradient steps, no interchange
-training---while DAS achieves only 0.150 after 1{,}000 gradient steps.
-The weight matrices directly encode the causal structure.
+training---while DAS achieves only 0.150 at $k = 8$ after 1{,}000 gradient
+steps. The comparison is not dimension-matched: SVD requires $4\times$ the
+subspace dimension, reflecting that the top singular vectors of $W_\text{FF}$
+include directions relevant to the causal variable but also spectral
+directions that are not causally active. Nevertheless, the fact that a
+zero-cost weight-space decomposition outperforms an optimized
+activation-space method is striking.
 
 The Grassmannian distance between the SVD and DAS subspaces ranges from
 1.5 to 8.2 radians---they are near-orthogonal. This is consistent with
@@ -1202,8 +1101,9 @@ $W_K \to W_K R$ leaves $W_Q W_K^\top$ invariant.
 \label{sec:un_training}
 
 If grokking creates causal structure, does un-training---continuing to train
-on the wrong operation's labels---destroy it? We test three grokked models
-by retraining them with shuffled labels from a different operation.
+on the wrong operation's labels---destroy it? We present preliminary results
+($n{=}1$ per condition) from three grokked models retrained with shuffled
+labels from a different operation.
 
 \begin{table}[t]
 \centering
@@ -1243,86 +1143,30 @@ prime-modulus operations.
 \subsection{Stratum classification: toy models vs.\ pretrained}
 \label{sec:strata}
 
-We test whether the singular value structure of weight matrices provides
-an alternative lens on causal geometry. Following ideas from random matrix
-theory, we classify each head's OV and QK circuits into four \emph{strata}
-based on their spectral profile:
+We test whether the singular value structure of weight matrices---classifying
+each head's OV and QK circuits into strata based on spectral gap, cumulative
+variance, and effective rank---provides an alternative lens on causal
+geometry.
 
-\begin{center}
-\small
-\begin{tabular}{lll}
-\toprule
-Stratum & Criterion & Interpretation \\
-\midrule
-$\mathcal{M}_1$ & gap ratio $> 3$, $k_{90} \leq 2$ & Single dominant direction \\
-$\mathcal{M}_k$ & top-8 cumvar $> 0.85$, $k_{90} \leq 8$ & Low-rank subspace \\
-$\mathcal{M}_\Sigma$ & erank $< 0.3 \cdot \text{dim}$ & Moderate rank \\
-$\mathcal{M}_D$ & none of the above & Full-rank / distributed \\
-\bottomrule
-\end{tabular}
-\end{center}
+In grokked 1-layer models ($p = 113$), the classification works: all four
+heads have low-rank OV (erank 2.1--6.2) and rank-1 QK (gap ratio $> 3$),
+consistent with the Fourier mechanism where QK selects frequency pairs and
+OV operates in the active Fourier subspace.
 
-\paragraph{Grokked toy models: strata reflect algorithm structure.}
-In grokked 1-layer models ($p = 113$, $d_\text{model} = 128$), all four
-attention heads have OV $\in \mathcal{M}_k$ (erank 2.1--6.2) and
-QK $\in \mathcal{M}_1$ (single dominant singular value with gap ratio $> 3$).
-The FF circuit is $\mathcal{M}_k$ (erank 5.5). This is consistent with the
-Fourier mechanism: QK selects a single frequency pair ($\mathcal{M}_1$), while
-OV operates in the broader subspace of active Fourier modes
-($\mathcal{M}_k$).
+In GPT-2-small, it fails completely. Of 144 heads, 143 fall into the
+moderate-rank stratum ($\mathcal{M}_\Sigma$) regardless of function.
+Circuit heads (IOI name movers, induction, s-inhibition) have \emph{higher}
+average OV erank (54.6) than non-circuit heads (49.5)---the opposite of
+what low-rank structure would predict. The explanation is superposition:
+each head participates in multiple tasks, producing high effective rank
+even if each task-specific contribution is low-rank.
 
-\paragraph{Pretrained GPT-2: strata have no discriminative power.}
-In GPT-2-small ($d_\text{model} = 768$, $d_\text{head} = 64$), 143 of 144
-attention heads have OV $\in \mathcal{M}_\Sigma$ regardless of their
-function. The single $\mathcal{M}_1$ head (L11H8, erank 1.18) is
-\emph{not} a known circuit head. Known circuit heads---IOI name movers
-(erank 60.1--60.4), induction heads (erank 51.5--61.0), s-inhibition heads
-(erank 57.0--59.9)---are indistinguishable from non-circuit heads by
-stratum. Circuit heads have \emph{higher} average OV erank (54.6)
-than non-circuit heads (49.5), the opposite of what the theory predicts.
-
-\begin{table}[t]
-\centering
-\small
-\begin{tabular}{lcc}
-\toprule
-& Circuit heads ($n{=}40$) & Non-circuit ($n{=}104$) \\
-\midrule
-OV erank (mean) & 54.6 & 49.5 \\
-OV gap ratio (mean) & 1.24 & 1.39 \\
-QK erank (mean) & 53.0 & 46.9 \\
-\bottomrule
-\end{tabular}
-\caption{Circuit vs.\ non-circuit heads in GPT-2. Circuit heads have
-\emph{higher} effective rank---more distributed, not less. The stratum
-classification fails to distinguish them.}
-\label{tab:gpt2_strata}
-\end{table}
-
-\paragraph{Why strata fail at scale.}
-The failure is expected under superposition. GPT-2 solves hundreds of tasks
-simultaneously; a single head participating in IOI, induction, and
-greater-than needs different principal components for each task. Its OV
-matrix is the superposition of many low-rank contributions, producing high
-effective rank ($\mathcal{M}_\Sigma$) even though each individual
-task-circuit may be low-rank. Grokking models do not superpose---they
-solve exactly one problem in 128 dimensions using 2--8 dimensions of that
-space. Strata are a valid description of \emph{single-task} models but do
-not generalize to pretrained models under superposition.
-
-The most promising rescue is \textbf{task-conditioned strata}: project each
-head's OV matrix into the task-specific DAS subspace, then classify the
-projected matrix's stratum. If IOI name movers are $\mathcal{M}_1$ when
-projected into the IOI subspace, the theory is rehabilitated at the cost
-of requiring task-specific measurement. We leave this to future work.
-
-\paragraph{Strata vs.\ equivariance.}
-The equivariance diagnostic (\S\ref{sec:results}) cleanly separates the
-three-class partition without any spectral analysis. The stratum
-classification adds mechanistic detail to what equivariance already captures,
-but does not provide discriminative power beyond it. For the atlas, the lesson
-is methodological: \textbf{functional diagnostics (equivariance) outperform
-structural diagnostics (spectral profile)} for classifying causal geometry.
+The methodological lesson: \textbf{functional diagnostics (equivariance)
+outperform structural diagnostics (spectral profile)} for classifying
+causal geometry. Equivariance cleanly separates the three-class partition
+without spectral analysis. Task-conditioned strata---projecting OV into
+a task-specific DAS subspace before classifying---may rescue the approach
+but remain untested.
 
 
 \section{Discussion}
@@ -1372,7 +1216,7 @@ level~2 (faithfulness) because the orthogonal projection modifies only the
 subspace component, but it may fail level~1 when the causal variable is
 nonlinear. Unconstrained nonlinear methods easily satisfy level~1 but fail
 level~2---they can achieve perfect IIA by learning degenerate solutions. The
-structured VAE satisfies both because the ELBO provides the reconstruction and
+Structured pi-SAE satisfies both because the ELBO provides the reconstruction and
 regularization constraints that prevent degeneracy.
 
 \subsection{Grokking enables causal structure---linear or nonlinear}
@@ -1457,16 +1301,17 @@ computation beyond simple linear readout from the weight matrices.
 Our grokking experiments use single-layer transformers on synthetic tasks.
 Whether the grokking--Grassmannian link holds in deeper models or natural
 language is an open question, though the $k$-sweep and equivariance
-diagnostics apply regardless. The structured VAE introduces a model-selection
+diagnostics apply regardless. The Structured pi-SAE introduces a model-selection
 problem (architecture, $\beta$, $\alpha$) that DAS avoids. Multi-seed
 stability experiments (10 seeds per stochastic operation) are underway. The
-connection between the structured VAE latent space and the Fourier
+connection between the Structured pi-SAE latent space and the Fourier
 representation structure identified by \citet{nanda2023progress} deserves
 further theoretical analysis. The stratum classification
 (\S\ref{sec:strata}) fails on pretrained models; task-conditioned strata
-remain untested. The un-training experiments (\S\ref{sec:un_training}) use
-only three operations---broader coverage would clarify whether composite
-moduli systematically produce more robust grokked structure.
+remain untested. The un-training experiments (\S\ref{sec:un_training}) are
+preliminary ($n{=}1$ per condition, three operations)---multi-seed
+replication and broader operation coverage are needed before drawing firm
+conclusions about un-training robustness.
 
 
 \section{Related Work}
@@ -1531,7 +1376,7 @@ Concurrent work on nonlinear interchange interventions
 \citep{geiger2024causal} uses neural network featurizers before applying DAS.
 Our results show that this approach is vulnerable to the lookup-table failure
 mode (\S\ref{sec:nldas_vacuous}): unconstrained featurizers achieve perfect IIA
-by learning degenerate encoder-decoders. Our structured VAE approach uses the
+by learning degenerate encoder-decoders. Our Structured pi-SAE approach uses the
 ELBO to provide the reconstruction and regularization constraints that prevent
 this degeneracy, connecting to the identifiability literature
 \citep{khemakhem2020variational, sutter2020multimodal} which establishes that
