@@ -1,0 +1,1226 @@
+{
+  "checkpoint": "shared_bank_global_dense",
+  "task": "IOI",
+  "k": 32,
+  "n_factors": 9,
+  "factors": [
+    188,
+    222,
+    264,
+    383,
+    798,
+    824,
+    837,
+    909,
+    1016
+  ],
+  "factor_roles": {
+    "188": "Duplicate token detection",
+    "222": "Convergent S-inhibition",
+    "264": "S-inhibition pathway",
+    "383": "Name mover output",
+    "798": "Token identity",
+    "824": "Late-layer composition",
+    "837": "Auxiliary",
+    "909": "Early positional encoding",
+    "1016": "Late composition"
+  },
+  "coupling_matrix": {
+    "factor_order": [
+      188,
+      222,
+      264,
+      383,
+      798,
+      824,
+      837,
+      909,
+      1016
+    ],
+    "values": [
+      [
+        0.0,
+        0.0029138265672372654,
+        0.022794059084844775,
+        0.0036524520910461433,
+        0.0027410801631049253,
+        0.006020220658683684,
+        0.005793661606730893,
+        0.022508980553539004,
+        0.0006862595037091523
+      ],
+      [
+        0.007592093228595331,
+        0.0,
+        0.005451671808259562,
+        0.0008999469282571226,
+        0.000687752130033914,
+        0.0014838802708254661,
+        0.001321913063293323,
+        0.005550781323108822,
+        0.00023095090364222415
+      ],
+      [
+        0.022278686403296888,
+        0.002267472264065873,
+        0.0,
+        0.0024829134927131236,
+        0.0018485227337805554,
+        0.004049454786581919,
+        0.004223515032208525,
+        0.01530225106398575,
+        0.00044038342821295373
+      ],
+      [
+        0.00680862988519948,
+        0.0006967129083932377,
+        0.005208578586461954,
+        0.0,
+        0.0009248554197256453,
+        0.001412911995430477,
+        0.001355002765194513,
+        0.004820129041036125,
+        0.00015578749662381597
+      ],
+      [
+        0.01396874341298826,
+        0.0011259675957262516,
+        0.009519352694042027,
+        0.0018748508737189695,
+        0.0,
+        0.002725426311371848,
+        0.0027153548144269735,
+        0.010128991794772446,
+        0.00039906024176161736
+      ],
+      [
+        0.008673044387251139,
+        0.0008042520057642832,
+        0.005998300970532,
+        0.0011741861380869523,
+        0.0009492480639892165,
+        0.0,
+        0.0016286473983200267,
+        0.006299855231191032,
+        0.00024941927040345035
+      ],
+      [
+        0.00504731188993901,
+        0.0004888798357569613,
+        0.00365171383600682,
+        0.0005954544612905011,
+        0.000475528937386116,
+        0.000990935332083609,
+        0.0,
+        0.003453571116551757,
+        0.0001045644748955965
+      ],
+      [
+        0.019210730853956193,
+        0.0019233288039686158,
+        0.013978467643028125,
+        0.002438811236061156,
+        0.0018472752017260063,
+        0.0036280736021581106,
+        0.003675707834190689,
+        0.0,
+        0.00044167519808979705
+      ],
+      [
+        0.0013506748073268682,
+        0.00013029924957663752,
+        0.0009537818987155333,
+        0.00016913281069719233,
+        0.00016116233746288344,
+        0.00026442807575222105,
+        0.00019589680596254766,
+        0.0010256831301376224,
+        0.0
+      ]
+    ],
+    "asymmetry": [
+      [
+        0.0,
+        -0.004678266661358066,
+        0.0005153726815478876,
+        -0.0031561777941533364,
+        -0.011227663249883335,
+        -0.002652823728567455,
+        0.0007463497167918831,
+        0.0032982496995828114,
+        -0.0006644153036177158
+      ],
+      [
+        0.004678266661358066,
+        0.0,
+        0.0031841995441936888,
+        0.0002032340198638849,
+        -0.0004382154656923376,
+        0.0006796282650611829,
+        0.0008330332275363617,
+        0.0036274525191402063,
+        0.00010065165406558663
+      ],
+      [
+        -0.0005153726815478876,
+        -0.0031841995441936888,
+        0.0,
+        -0.0027256650937488303,
+        -0.007670829960261472,
+        -0.0019488461839500815,
+        0.0005718011962017044,
+        0.001323783420957625,
+        -0.0005133984705025796
+      ],
+      [
+        0.0031561777941533364,
+        -0.0002032340198638849,
+        0.0027256650937488303,
+        0.0,
+        -0.0009499954539933242,
+        0.0002387258573435247,
+        0.0007595483039040118,
+        0.0023813178049749695,
+        -1.3345314073376358e-05
+      ],
+      [
+        0.011227663249883335,
+        0.0004382154656923376,
+        0.007670829960261472,
+        0.0009499954539933242,
+        0.0,
+        0.0017761782473826315,
+        0.0022398258770408574,
+        0.00828171659304644,
+        0.00023789790429873392
+      ],
+      [
+        0.002652823728567455,
+        -0.0006796282650611829,
+        0.0019488461839500815,
+        -0.0002387258573435247,
+        -0.0017761782473826315,
+        0.0,
+        0.0006377120662364177,
+        0.002671781629032921,
+        -1.5008805348770693e-05
+      ],
+      [
+        -0.0007463497167918831,
+        -0.0008330332275363617,
+        -0.0005718011962017044,
+        -0.0007595483039040118,
+        -0.0022398258770408574,
+        -0.0006377120662364177,
+        0.0,
+        -0.00022213671763893217,
+        -9.133233106695116e-05
+      ],
+      [
+        -0.0032982496995828114,
+        -0.0036274525191402063,
+        -0.001323783420957625,
+        -0.0023813178049749695,
+        -0.00828171659304644,
+        -0.002671781629032921,
+        0.00022213671763893217,
+        0.0,
+        -0.0005840079320478253
+      ],
+      [
+        0.0006644153036177158,
+        -0.00010065165406558663,
+        0.0005133984705025796,
+        1.3345314073376358e-05,
+        -0.00023789790429873392,
+        1.5008805348770693e-05,
+        9.133233106695116e-05,
+        0.0005840079320478253,
+        0.0
+      ]
+    ]
+  },
+  "dim_mass": {
+    "top_10_dims": [
+      26,
+      12,
+      20,
+      14,
+      15,
+      24,
+      8,
+      21,
+      23,
+      18
+    ],
+    "W_mass": [
+      0.08374328166246414,
+      0.03126804903149605,
+      0.07086852937936783,
+      0.06486482918262482,
+      0.09697172045707703,
+      0.10442329198122025,
+      0.0837736651301384,
+      0.13802464306354523,
+      0.08489730209112167,
+      0.030516300350427628,
+      0.11786545813083649,
+      0.04666527360677719,
+      0.11471927911043167,
+      0.10644476115703583,
+      0.30203425884246826,
+      0.2912118434906006,
+      0.09194348007440567,
+      0.09375640004873276,
+      0.11344880610704422,
+      0.05819987133145332,
+      0.13026894629001617,
+      0.1704789400100708,
+      0.06484948098659515,
+      0.09672671556472778,
+      0.1085815355181694,
+      0.07196350395679474,
+      0.1269170045852661,
+      0.06206304207444191,
+      0.08856705576181412,
+      0.0751715749502182,
+      0.08333460241556168,
+      0.05297853797674179
+    ],
+    "R_mass": [
+      4.763195037841797,
+      0.15725356340408325,
+      1.2229775190353394,
+      8.805925369262695,
+      4.791167736053467,
+      1.9290913343429565,
+      1.137362003326416,
+      4.212621688842773,
+      11.321259498596191,
+      3.193103551864624,
+      6.222661018371582,
+      4.1737775802612305,
+      15.723368644714355,
+      2.6076643466949463,
+      14.174589157104492,
+      13.446022987365723,
+      1.4846806526184082,
+      4.950406074523926,
+      9.4804105758667,
+      3.6391685009002686,
+      14.468822479248047,
+      10.574641227722168,
+      1.5645320415496826,
+      9.863819122314453,
+      13.260215759277344,
+      7.890190601348877,
+      19.914016723632812,
+      2.90244197845459,
+      7.748976230621338,
+      8.254926681518555,
+      5.373165607452393,
+      1.75868821144104
+    ]
+  },
+  "notears": {
+    "edges": [
+      {
+        "source": 798,
+        "target": 188,
+        "source_role": "Token identity",
+        "target_role": "Duplicate token detection",
+        "weight": 0.011227663249883335
+      },
+      {
+        "source": 798,
+        "target": 909,
+        "source_role": "Token identity",
+        "target_role": "Early positional encoding",
+        "weight": 0.00828171659304644
+      },
+      {
+        "source": 798,
+        "target": 264,
+        "source_role": "Token identity",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0076708299602614724
+      },
+      {
+        "source": 222,
+        "target": 188,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Duplicate token detection",
+        "weight": 0.004678266661358066
+      },
+      {
+        "source": 222,
+        "target": 909,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Early positional encoding",
+        "weight": 0.0036274525191402067
+      },
+      {
+        "source": 188,
+        "target": 909,
+        "source_role": "Duplicate token detection",
+        "target_role": "Early positional encoding",
+        "weight": 0.0032982496995828114
+      },
+      {
+        "source": 222,
+        "target": 264,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0031841995441936888
+      },
+      {
+        "source": 383,
+        "target": 188,
+        "source_role": "Name mover output",
+        "target_role": "Duplicate token detection",
+        "weight": 0.0031561777941533364
+      },
+      {
+        "source": 383,
+        "target": 264,
+        "source_role": "Name mover output",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0027256650937488303
+      },
+      {
+        "source": 824,
+        "target": 909,
+        "source_role": "Late-layer composition",
+        "target_role": "Early positional encoding",
+        "weight": 0.002671781629032921
+      },
+      {
+        "source": 824,
+        "target": 188,
+        "source_role": "Late-layer composition",
+        "target_role": "Duplicate token detection",
+        "weight": 0.002652823728567455
+      },
+      {
+        "source": 383,
+        "target": 909,
+        "source_role": "Name mover output",
+        "target_role": "Early positional encoding",
+        "weight": 0.0023813178049749695
+      },
+      {
+        "source": 798,
+        "target": 837,
+        "source_role": "Token identity",
+        "target_role": "Auxiliary",
+        "weight": 0.0022398258770408574
+      },
+      {
+        "source": 824,
+        "target": 264,
+        "source_role": "Late-layer composition",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0019488461839500815
+      },
+      {
+        "source": 798,
+        "target": 824,
+        "source_role": "Token identity",
+        "target_role": "Late-layer composition",
+        "weight": 0.0017761782473826313
+      }
+    ],
+    "comparison": {
+      "method": "NOTEARS",
+      "matched": [
+        {
+          "edge": "Token identity -> dup token",
+          "source": 798,
+          "target": 188
+        }
+      ],
+      "missed": [
+        {
+          "edge": "Early pos -> token identity",
+          "source": 909,
+          "target": 798
+        },
+        {
+          "edge": "Dup token -> S-inhibition",
+          "source": 188,
+          "target": 264
+        },
+        {
+          "edge": "Dup token -> convergent S-inhibition",
+          "source": 188,
+          "target": 222
+        },
+        {
+          "edge": "S-inhibition -> name mover",
+          "source": 264,
+          "target": 383
+        },
+        {
+          "edge": "Convergent S-inhibition -> name mover",
+          "source": 222,
+          "target": 383
+        },
+        {
+          "edge": "Late composition -> name mover",
+          "source": 1016,
+          "target": 383
+        }
+      ],
+      "novel": [
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.00828171659304644
+        },
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0076708299602614724
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.004678266661358066
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.0036274525191402067
+        },
+        {
+          "source": 188,
+          "source_role": "Duplicate token detection",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.0032982496995828114
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0031841995441936888
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.0031561777941533364
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0027256650937488303
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.002671781629032921
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.002652823728567455
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.0023813178049749695
+        },
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 837,
+          "target_role": "Auxiliary",
+          "strength": 0.0022398258770408574
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0019488461839500815
+        },
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 824,
+          "target_role": "Late-layer composition",
+          "strength": 0.0017761782473826313
+        }
+      ],
+      "recall": 0.14285714285714285,
+      "n_discovered": 15,
+      "n_matched": 1,
+      "n_expected": 7
+    }
+  },
+  "pc": {
+    "edges": [
+      {
+        "source": 798,
+        "target": 909,
+        "source_role": "Token identity",
+        "target_role": "Early positional encoding",
+        "weight": 0.00828171659304644
+      },
+      {
+        "source": 188,
+        "target": 909,
+        "source_role": "Duplicate token detection",
+        "target_role": "Early positional encoding",
+        "weight": 0.0032982496995828114
+      },
+      {
+        "source": 824,
+        "target": 909,
+        "source_role": "Late-layer composition",
+        "target_role": "Early positional encoding",
+        "weight": 0.002671781629032921
+      },
+      {
+        "source": 824,
+        "target": 188,
+        "source_role": "Late-layer composition",
+        "target_role": "Duplicate token detection",
+        "weight": 0.002652823728567455
+      },
+      {
+        "source": 824,
+        "target": 264,
+        "source_role": "Late-layer composition",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0019488461839500815
+      },
+      {
+        "source": 264,
+        "target": 909,
+        "source_role": "S-inhibition pathway",
+        "target_role": "Early positional encoding",
+        "weight": 0.001323783420957625
+      },
+      {
+        "source": 1016,
+        "target": 188,
+        "source_role": "Late composition",
+        "target_role": "Duplicate token detection",
+        "weight": 0.0006644153036177158
+      },
+      {
+        "source": 188,
+        "target": 264,
+        "source_role": "Duplicate token detection",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0005153726815478876
+      },
+      {
+        "source": 1016,
+        "target": 264,
+        "source_role": "Late composition",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.0005133984705025796
+      },
+      {
+        "source": 798,
+        "target": 1016,
+        "source_role": "Token identity",
+        "target_role": "Late composition",
+        "weight": 0.00023789790429873392
+      },
+      {
+        "source": 909,
+        "target": 837,
+        "source_role": "Early positional encoding",
+        "target_role": "Auxiliary",
+        "weight": 0.00022213671763893217
+      },
+      {
+        "source": 222,
+        "target": 383,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Name mover output",
+        "weight": 0.0002032340198638849
+      },
+      {
+        "source": 222,
+        "target": 1016,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Late composition",
+        "weight": 0.00010065165406558663
+      },
+      {
+        "source": 1016,
+        "target": 824,
+        "source_role": "Late composition",
+        "target_role": "Late-layer composition",
+        "weight": 1.5008805348770693e-05
+      },
+      {
+        "source": 1016,
+        "target": 383,
+        "source_role": "Late composition",
+        "target_role": "Name mover output",
+        "weight": 1.3345314073376358e-05
+      }
+    ],
+    "comparison": {
+      "method": "PC",
+      "matched": [
+        {
+          "edge": "Dup token -> S-inhibition",
+          "source": 188,
+          "target": 264
+        },
+        {
+          "edge": "Convergent S-inhibition -> name mover",
+          "source": 222,
+          "target": 383
+        },
+        {
+          "edge": "Late composition -> name mover",
+          "source": 1016,
+          "target": 383
+        }
+      ],
+      "missed": [
+        {
+          "edge": "Early pos -> token identity",
+          "source": 909,
+          "target": 798
+        },
+        {
+          "edge": "Token identity -> dup token",
+          "source": 798,
+          "target": 188
+        },
+        {
+          "edge": "Dup token -> convergent S-inhibition",
+          "source": 188,
+          "target": 222
+        },
+        {
+          "edge": "S-inhibition -> name mover",
+          "source": 264,
+          "target": 383
+        }
+      ],
+      "novel": [
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.00828171659304644
+        },
+        {
+          "source": 188,
+          "source_role": "Duplicate token detection",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.0032982496995828114
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.002671781629032921
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.002652823728567455
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0019488461839500815
+        },
+        {
+          "source": 264,
+          "source_role": "S-inhibition pathway",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.001323783420957625
+        },
+        {
+          "source": 1016,
+          "source_role": "Late composition",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.0006644153036177158
+        },
+        {
+          "source": 1016,
+          "source_role": "Late composition",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.0005133984705025796
+        },
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 1016,
+          "target_role": "Late composition",
+          "strength": 0.00023789790429873392
+        },
+        {
+          "source": 909,
+          "source_role": "Early positional encoding",
+          "target": 837,
+          "target_role": "Auxiliary",
+          "strength": 0.00022213671763893217
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 1016,
+          "target_role": "Late composition",
+          "strength": 0.00010065165406558663
+        },
+        {
+          "source": 1016,
+          "source_role": "Late composition",
+          "target": 824,
+          "target_role": "Late-layer composition",
+          "strength": 1.5008805348770693e-05
+        }
+      ],
+      "recall": 0.42857142857142855,
+      "n_discovered": 15,
+      "n_matched": 3,
+      "n_expected": 7
+    }
+  },
+  "asymmetry_threshold": {
+    "edges": [
+      {
+        "source": 798,
+        "target": 188,
+        "source_role": "Token identity",
+        "target_role": "Duplicate token detection",
+        "weight": 0.01396874341298826
+      },
+      {
+        "source": 798,
+        "target": 909,
+        "source_role": "Token identity",
+        "target_role": "Early positional encoding",
+        "weight": 0.010128991794772446
+      },
+      {
+        "source": 798,
+        "target": 264,
+        "source_role": "Token identity",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.009519352694042027
+      },
+      {
+        "source": 222,
+        "target": 188,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Duplicate token detection",
+        "weight": 0.007592093228595331
+      },
+      {
+        "source": 383,
+        "target": 188,
+        "source_role": "Name mover output",
+        "target_role": "Duplicate token detection",
+        "weight": 0.00680862988519948
+      },
+      {
+        "source": 824,
+        "target": 909,
+        "source_role": "Late-layer composition",
+        "target_role": "Early positional encoding",
+        "weight": 0.006299855231191032
+      },
+      {
+        "source": 222,
+        "target": 909,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "Early positional encoding",
+        "weight": 0.005550781323108822
+      },
+      {
+        "source": 222,
+        "target": 264,
+        "source_role": "Convergent S-inhibition",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.005451671808259562
+      },
+      {
+        "source": 383,
+        "target": 264,
+        "source_role": "Name mover output",
+        "target_role": "S-inhibition pathway",
+        "weight": 0.005208578586461954
+      },
+      {
+        "source": 383,
+        "target": 909,
+        "source_role": "Name mover output",
+        "target_role": "Early positional encoding",
+        "weight": 0.004820129041036125
+      }
+    ],
+    "comparison": {
+      "method": "Asymmetry-threshold",
+      "matched": [
+        {
+          "edge": "Token identity -> dup token",
+          "source": 798,
+          "target": 188
+        }
+      ],
+      "missed": [
+        {
+          "edge": "Early pos -> token identity",
+          "source": 909,
+          "target": 798
+        },
+        {
+          "edge": "Dup token -> S-inhibition",
+          "source": 188,
+          "target": 264
+        },
+        {
+          "edge": "Dup token -> convergent S-inhibition",
+          "source": 188,
+          "target": 222
+        },
+        {
+          "edge": "S-inhibition -> name mover",
+          "source": 264,
+          "target": 383
+        },
+        {
+          "edge": "Convergent S-inhibition -> name mover",
+          "source": 222,
+          "target": 383
+        },
+        {
+          "edge": "Late composition -> name mover",
+          "source": 1016,
+          "target": 383
+        }
+      ],
+      "novel": [
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.010128991794772446
+        },
+        {
+          "source": 798,
+          "source_role": "Token identity",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.009519352694042027
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.007592093228595331
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 188,
+          "target_role": "Duplicate token detection",
+          "strength": 0.00680862988519948
+        },
+        {
+          "source": 824,
+          "source_role": "Late-layer composition",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.006299855231191032
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.005550781323108822
+        },
+        {
+          "source": 222,
+          "source_role": "Convergent S-inhibition",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.005451671808259562
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 264,
+          "target_role": "S-inhibition pathway",
+          "strength": 0.005208578586461954
+        },
+        {
+          "source": 383,
+          "source_role": "Name mover output",
+          "target": 909,
+          "target_role": "Early positional encoding",
+          "strength": 0.004820129041036125
+        }
+      ],
+      "recall": 0.14285714285714285,
+      "n_discovered": 10,
+      "n_matched": 1,
+      "n_expected": 7
+    }
+  },
+  "mediation": [
+    {
+      "edge": "Early pos -> token identity",
+      "source": 909,
+      "target": 798,
+      "direct_effect": 0.0018472752017260063,
+      "best_mediator": 188,
+      "mediator_role": "Duplicate token detection",
+      "indirect_effect": 5.265815326252706e-05,
+      "total_effect": 0.0018999333549885335,
+      "proportion_mediated": 0.027715789674551433
+    },
+    {
+      "edge": "Token identity -> dup token",
+      "source": 798,
+      "target": 188,
+      "direct_effect": 0.01396874341298826,
+      "best_mediator": 264,
+      "mediator_role": "S-inhibition pathway",
+      "indirect_effect": 0.00021207867343294172,
+      "total_effect": 0.014180822086421203,
+      "proportion_mediated": 0.014955315858310987
+    },
+    {
+      "edge": "Dup token -> S-inhibition",
+      "source": 188,
+      "target": 264,
+      "direct_effect": 0.022794059084844775,
+      "best_mediator": 909,
+      "mediator_role": "Early positional encoding",
+      "indirect_effect": 0.00031464105634519424,
+      "total_effect": 0.02310870014118997,
+      "proportion_mediated": 0.01361569687705472
+    },
+    {
+      "edge": "Dup token -> convergent S-inhibition",
+      "source": 188,
+      "target": 222,
+      "direct_effect": 0.0029138265672372654,
+      "best_mediator": 264,
+      "mediator_role": "S-inhibition pathway",
+      "indirect_effect": 5.1684896760364265e-05,
+      "total_effect": 0.0029655114639976295,
+      "proportion_mediated": 0.017428661931622052
+    },
+    {
+      "edge": "S-inhibition -> name mover",
+      "source": 264,
+      "target": 383,
+      "direct_effect": 0.0024829134927131236,
+      "best_mediator": 188,
+      "mediator_role": "Duplicate token detection",
+      "indirect_effect": 8.1371834739483e-05,
+      "total_effect": 0.0025642853274526066,
+      "proportion_mediated": 0.03173275371049243
+    },
+    {
+      "edge": "Convergent S-inhibition -> name mover",
+      "source": 222,
+      "target": 383,
+      "direct_effect": 0.0008999469282571226,
+      "best_mediator": 188,
+      "mediator_role": "Duplicate token detection",
+      "indirect_effect": 2.7729756788200285e-05,
+      "total_effect": 0.0009276766850453229,
+      "proportion_mediated": 0.02989161766725388
+    },
+    {
+      "edge": "Late composition -> name mover",
+      "source": 1016,
+      "target": 383,
+      "direct_effect": 0.00016913281069719233,
+      "best_mediator": 188,
+      "mediator_role": "Duplicate token detection",
+      "indirect_effect": 4.933275024344366e-06,
+      "total_effect": 0.0001740660857215367,
+      "proportion_mediated": 0.028341391167010004
+    }
+  ],
+  "sem": {
+    "per_node": {
+      "188": {
+        "parents": [
+          798,
+          222,
+          383,
+          824
+        ],
+        "parent_roles": [
+          "Token identity",
+          "Convergent S-inhibition",
+          "Name mover output",
+          "Late-layer composition"
+        ],
+        "coefficients": {
+          "798": 1.2257849644274244,
+          "222": 2.2076661437675207,
+          "383": 3.144015928800225,
+          "824": 1.3795863123907672
+        },
+        "r_squared": 0.9816525644681701,
+        "residual_var": 8.380196559274546e-07
+      },
+      "264": {
+        "parents": [
+          798,
+          222,
+          383,
+          824
+        ],
+        "parent_roles": [
+          "Token identity",
+          "Convergent S-inhibition",
+          "Name mover output",
+          "Late-layer composition"
+        ],
+        "coefficients": {
+          "798": 1.3594439916191041,
+          "222": 1.3773898730139613,
+          "383": 1.9805568522475023,
+          "824": 1.1504564363281007
+        },
+        "r_squared": 0.9913396672032009,
+        "residual_var": 3.7042809718104217e-07
+      },
+      "824": {
+        "parents": [
+          798
+        ],
+        "parent_roles": [
+          "Token identity"
+        ],
+        "coefficients": {
+          "798": 1.7236685306241961
+        },
+        "r_squared": 0.7545216708412474,
+        "residual_var": 7.84428228686527e-07
+      },
+      "837": {
+        "parents": [
+          798
+        ],
+        "parent_roles": [
+          "Token identity"
+        ],
+        "coefficients": {
+          "798": 1.6818394950921678
+        },
+        "r_squared": 0.722841503170798,
+        "residual_var": 8.283916771213e-07
+      },
+      "909": {
+        "parents": [
+          798,
+          222,
+          188,
+          824,
+          383
+        ],
+        "parent_roles": [
+          "Token identity",
+          "Convergent S-inhibition",
+          "Duplicate token detection",
+          "Late-layer composition",
+          "Name mover output"
+        ],
+        "coefficients": {
+          "798": 1.1769196746580564,
+          "222": 1.0477503967754476,
+          "188": 0.010875259150969822,
+          "824": 0.9945596210519061,
+          "383": 2.589302268818426
+        },
+        "r_squared": 0.9915528617767707,
+        "residual_var": 3.7319353867439995e-07
+      }
+    },
+    "mean_r_squared": 0.8883816534920375,
+    "rmsea": 0.6592961336449226,
+    "n_edges": 15,
+    "n_nodes_with_parents": 5,
+    "dag_source": "NOTEARS"
+  },
+  "expected_edges": [
+    {
+      "source": 909,
+      "target": 798,
+      "label": "Early pos -> token identity"
+    },
+    {
+      "source": 798,
+      "target": 188,
+      "label": "Token identity -> dup token"
+    },
+    {
+      "source": 188,
+      "target": 264,
+      "label": "Dup token -> S-inhibition"
+    },
+    {
+      "source": 188,
+      "target": 222,
+      "label": "Dup token -> convergent S-inhibition"
+    },
+    {
+      "source": 264,
+      "target": 383,
+      "label": "S-inhibition -> name mover"
+    },
+    {
+      "source": 222,
+      "target": 383,
+      "label": "Convergent S-inhibition -> name mover"
+    },
+    {
+      "source": 1016,
+      "target": 383,
+      "label": "Late composition -> name mover"
+    }
+  ]
+}
