@@ -45,7 +45,7 @@ batch0_prior_work/
 │   ├── TECHNICAL_REPORT_V2.md        # V2 results
 │   └── TECHNICAL_REPORT_V3.md        # V3 results (58 experiments, anti-DAS, Riemannian DAS)
 └── mechviews_audit/
-    └── audit_grokking.jsonl          # Mechviews validity audit of Nanda et al. grokking paper
+    └── audit_grokking.jsonl          # Mechviews validity audit of OUR methods/claims applied to grokking
 ```
 
 ## Source

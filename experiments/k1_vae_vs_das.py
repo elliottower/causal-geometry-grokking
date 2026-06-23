@@ -1206,7 +1206,8 @@ MIB_TASKS = {
 
 
 def run_mib_task(task_name, device, log, *, max_pairs=0, n_seeds=1,
-                 k_values=(1, 2, 4), vae_epochs=500, layer_override=None):
+                 k_values=(1, 2, 4), vae_epochs=500, layer_override=None,
+                 seed_offset=0):
     import ast
     import pandas as pd
     from tqdm import tqdm
@@ -1304,8 +1305,9 @@ def run_mib_task(task_name, device, log, *, max_pairs=0, n_seeds=1,
 
     for k in k_values:
         seed_runs = []
-        for seed in range(n_seeds):
-            log.info(f"[{utc_ts()}] --- {task_name} k={k} seed={seed}/{n_seeds} ---")
+        for seed_idx in range(n_seeds):
+            seed = seed_idx + seed_offset
+            log.info(f"[{utc_ts()}] --- {task_name} k={k} seed={seed} ({seed_idx+1}/{n_seeds}) ---")
             rng = random.Random(seed)
             indices = list(range(len(pairs)))
             rng.shuffle(indices)
@@ -2515,10 +2517,11 @@ def run_ivae_verification(operations: str = "addition,multiplication",
     return all_results
 
 
-@app.function(gpu="A100", timeout=10800, volumes={"/results": results_vol})
+@app.function(gpu="A100", timeout=21600, volumes={"/results": results_vol})
 def run_task(task_name: str, n_seeds: int = 1, max_pairs: int = 0,
              k_values: str = "1,2,4", layer: int = -1,
-             vae_epochs: int = 500, output_dir: str = "") -> dict:
+             vae_epochs: int = 500, output_dir: str = "",
+             seed_offset: int = 0) -> dict:
     import torch
     logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(message)s")
     log = logging.getLogger(__name__)
@@ -2529,7 +2532,8 @@ def run_task(task_name: str, n_seeds: int = 1, max_pairs: int = 0,
     layer_override = layer if layer >= 0 else None
     mib_kwargs = dict(max_pairs=max_pairs, n_seeds=n_seeds,
                       k_values=k_list, vae_epochs=vae_epochs,
-                      layer_override=layer_override)
+                      layer_override=layer_override,
+                      seed_offset=seed_offset)
 
     try:
         if task_name == "ioi":
@@ -2567,7 +2571,7 @@ def main(tasks: str = "ioi,addition,multiplication,squaring",
          n_seeds: int = 1, max_pairs: int = 0,
          k_values: str = "1,2,4", layer: int = -1,
          vae_epochs: int = 500, output_dir: str = "",
-         mode: str = "single"):
+         mode: str = "single", seed_offset: int = 0):
     if mode == "cross-task":
         print(f"Cross-task mode: tasks={tasks}, k={k_values.split(',')[0]}, "
               f"layer={layer if layer >= 0 else 8}, max_pairs={max_pairs or 500}")
@@ -2622,15 +2626,16 @@ def main(tasks: str = "ioi,addition,multiplication,squaring",
         return
 
     task_list = [t.strip() for t in tasks.split(",")]
-    print(f"Config: n_seeds={n_seeds}, max_pairs={max_pairs or 'all'}, "
-          f"k_values={k_values}, layer={layer if layer >= 0 else 'default'}, "
-          f"vae_epochs={vae_epochs}")
+    print(f"Config: n_seeds={n_seeds}, seed_offset={seed_offset}, "
+          f"max_pairs={max_pairs or 'all'}, k_values={k_values}, "
+          f"layer={layer if layer >= 0 else 'default'}, vae_epochs={vae_epochs}")
     handles = []
     for task in task_list:
         out = output_dir or f"/results/grassmannian_atlas/k1_pi_ablations/{task}"
         h = run_task.spawn(task, n_seeds=n_seeds, max_pairs=max_pairs,
                            k_values=k_values, layer=layer,
-                           vae_epochs=vae_epochs, output_dir=out)
+                           vae_epochs=vae_epochs, output_dir=out,
+                           seed_offset=seed_offset)
         handles.append((task, h))
         print(f"[{utc_ts()}] Spawned {task} pod: {h.object_id}")
 
