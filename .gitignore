@@ -25,3 +25,8 @@ cache/
 *.safetensors
 results/atlas.jsonl
 results/grokking_nonlinear_hunt/
+
+paper/theory_patch_complete.md
+paper/TODO_paper_assessment.md
+
+.idea/

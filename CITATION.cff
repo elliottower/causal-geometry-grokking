@@ -5,12 +5,6 @@ authors:
   - family-names: Tower
     given-names: Elliot
     email: elliot@elliottower.com
-  - family-names: Vegner
-    given-names: Ivan
-  - family-names: Siddharth
-    given-names: N.
-  - family-names: Doumas
-    given-names: Alex
 type: software
 license: MIT
 repository-code: "https://github.com/elliottower/grokking-causal-geometry"
