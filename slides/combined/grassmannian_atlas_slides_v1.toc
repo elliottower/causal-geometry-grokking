@@ -1,0 +1,16 @@
+\beamer@sectionintoc {1}{1. What is a causal variable?}{5}{0}{1}
+\beamer@sectionintoc {2}{2. DAS and the Grassmannian}{8}{0}{2}
+\beamer@sectionintoc {3}{3. Why linearity matters}{11}{0}{3}
+\beamer@sectionintoc {4}{4. 14 operations, three classes}{15}{0}{4}
+\beamer@sectionintoc {5}{5. Linear DAS fails completely}{20}{0}{5}
+\beamer@sectionintoc {6}{6. Stochastic grokking}{23}{0}{6}
+\beamer@sectionintoc {7}{7. Memorization artifacts}{27}{0}{7}
+\beamer@sectionintoc {8}{8. NL-DAS is vacuous}{29}{0}{8}
+\beamer@sectionintoc {9}{9. Intervention faithfulness}{33}{0}{9}
+\beamer@sectionintoc {10}{10. Structured VAE}{37}{0}{10}
+\beamer@sectionintoc {11}{11. Cross-task transfer}{41}{0}{11}
+\beamer@sectionintoc {12}{12. IOI is not Grassmannian}{43}{0}{12}
+\beamer@sectionintoc {13}{13. Four-level hierarchy}{46}{0}{13}
+\beamer@sectionintoc {14}{14. Continuous metrics}{48}{0}{14}
+\beamer@sectionintoc {15}{15. Practical advice}{50}{0}{15}
+\beamer@sectionintoc {16}{16. Conclusion}{53}{0}{16}

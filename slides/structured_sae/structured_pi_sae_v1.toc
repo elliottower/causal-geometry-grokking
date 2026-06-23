@@ -1,0 +1,12 @@
+\beamer@sectionintoc {1}{1. What is a causal variable?}{4}{0}{1}
+\beamer@sectionintoc {2}{2. DAS and the Grassmannian}{7}{0}{2}
+\beamer@sectionintoc {3}{3. Why linearity matters}{10}{0}{3}
+\beamer@sectionintoc {4}{10. Structured VAE}{15}{0}{4}
+\beamer@sectionintoc {5}{10b. Structured pi-SAE: sparse nonlinear causal discovery}{19}{0}{5}
+\beamer@sectionintoc {6}{10c. Beyond grokking: NLP tasks on GPT-2}{29}{0}{6}
+\beamer@sectionintoc {7}{What do the features learn?}{33}{0}{7}
+\beamer@sectionintoc {8}{11. Cross-task transfer}{39}{0}{8}
+\beamer@sectionintoc {9}{13. Four-level hierarchy}{44}{0}{9}
+\beamer@sectionintoc {10}{14. Continuous metrics}{46}{0}{10}
+\beamer@sectionintoc {11}{15. Practical advice}{48}{0}{11}
+\beamer@sectionintoc {12}{16. Conclusions}{51}{0}{12}

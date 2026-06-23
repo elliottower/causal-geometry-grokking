@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "When Does Linear Causal Abstraction Work? Mapping the Boundary on the Grassmannian"
+authors:
+  - family-names: Tower
+    given-names: Elliot
+    email: elliot@elliottower.com
+  - family-names: Vegner
+    given-names: Ivan
+  - family-names: Siddharth
+    given-names: N.
+  - family-names: Doumas
+    given-names: Alex
+type: software
+license: MIT
+repository-code: "https://github.com/elliottower/grokking-causal-geometry"
