@@ -1,10 +1,15 @@
-\documentclass[11pt]{article}
+\documentclass{article}
 
-\usepackage[margin=1in]{geometry}
+% TMLR format
+\usepackage[accepted]{tmlr}
+
+\newcommand{\openreview}{\url{https://openreview.net/forum?id=XXXX}}
+\def\month{06}
+\def\year{2026}
+
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{array}
@@ -27,8 +32,10 @@
 \title{When Does Linear Causal Abstraction Work?\\
 Mapping the Boundary on the Grassmannian}
 
-\author{Elliot Tower}
-\date{Draft --- \today}
+\author{
+Elliot Tower \\
+\texttt{elliot@elliottower.com}
+}
 
 \begin{document}
 \maketitle
@@ -1104,7 +1111,7 @@ that avoids them.
 VAE training, geometric diagnostics, and figure generation is available at
 \url{[repository URL]}.
 
-\bibliographystyle{plainnat}
+\bibliographystyle{tmlr}
 \bibliography{references}
 
 \end{document}
