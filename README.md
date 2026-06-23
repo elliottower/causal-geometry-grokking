@@ -86,6 +86,22 @@ modal run --detach experiments/grassmannian_geometry.py
 
 Most experiments were run on Modal A100 GPUs.
 
+## Citation
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20819725.svg)](https://doi.org/10.5281/zenodo.20819725)
+
+```bibtex
+@software{tower2026grassmannian,
+  author    = {Tower, Elliot},
+  title     = {When Does Linear Causal Abstraction Work? Mapping the Boundary on the Grassmannian},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {v0.1.0},
+  doi       = {10.5281/zenodo.20819725},
+  url       = {https://doi.org/10.5281/zenodo.20819725}
+}
+```
+
 ## License
 
 MIT
